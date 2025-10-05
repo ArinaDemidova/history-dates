@@ -16,19 +16,18 @@
 ### Сборка и запуск
 
 1. Клонируйте репозиторий:
-   - bash 
    - git clone https://github.com/ArinaDemidova/history-dates.git
    - cd history-dates
 
 2. Установите зависимости:
-   - bash npm install
+   - npm install
 
 3. Для локальной разработки запустите сервер:
-   - bash npm run start
+   - npm run start
    - Откройте http://localhost:8080 в вашем браузере.
 
 5. Для сборки продакшн-версии выполните команду:
-   - bash npm run build
+   - npm run build
    - Результат сборки находится в директории /dist.
 
 ## Использование инструментов
