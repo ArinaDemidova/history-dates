@@ -1,0 +1,27 @@
+*
+{
+  box-sizing : border-box;
+}
+
+html
+{
+  display    : flex;
+  min-height : 100%;
+
+  body
+  {
+    font-family      : 'PT Sans', sans-serif;
+    display          : flex;
+    align-items      : stretch;
+    justify-content  : center;
+    margin           : 0;
+    flex-grow        : 1;
+    font-weight      : 400;
+    background-color : #f4f5f9;
+
+    #root
+    {
+      width : 1440px;
+    }
+  }
+}
