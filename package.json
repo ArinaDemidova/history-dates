@@ -1,7 +1,7 @@
 {
   "name": "dates-circle-slider",
   "version": "1.0.0",
-  "description": "",
+  "description": "Проект представляет собой интерактивный переключатель исторических интервалов, каждый из которых показывает свой собственный таймлайн исторических событий в указанном временном диапазоне",
   "main": "src/index.tsx",
   "scripts": {
     "start": "webpack serve --mode development",
