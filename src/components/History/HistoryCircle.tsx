@@ -1,4 +1,4 @@
-import React, {RefObject} from 'react';
+import React, {forwardRef, RefObject} from 'react';
 import {HistoryInterval} from "../../types/History/HistoryInterval";
 import {PointStyles} from "../../types/History/PointStyles";
 
@@ -12,7 +12,7 @@ interface HistoryCircleProps {
     pointsStyles : RefObject<PointStyles[]>
 }
 
-const HistoryCircle = React.forwardRef(
+const HistoryCircle = forwardRef(
     ({ intervals, activeInterval, isAnimated, discRef, controlsRef, setActiveByIndex, pointsStyles }: HistoryCircleProps, _ref) => {
     return <>
         <div className={'history__disc'} ref={discRef}></div>

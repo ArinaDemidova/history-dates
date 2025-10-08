@@ -4,6 +4,7 @@ import {useIntervalNavigator} from "../../hooks/useIntervalNavigator";
 
 import gsap from 'gsap';
 import {useGSAP} from '@gsap/react';
+import {SwiperRef} from "swiper/react";
 
 import './history.scss';
 import 'swiper/css';
@@ -31,11 +32,12 @@ export default function History({info}: HistoryProps) {
     const [isAnimated, setIsAnimated] = useState<boolean>(false);
 
     const discRef = useRef<HTMLDivElement|null>(null);
-
     const yearStartRef = useRef<HTMLDivElement | null>(null);
     const yearEndRef = useRef<HTMLDivElement | null>(null);
+    const controlsRef = useRef<HTMLDivElement | null>(null);
+    const swiperRef = useRef<SwiperRef | null>(null);
 
-    const controlsRef = useRef<HTMLDivElement|null>(null);
+    const container = useRef<HTMLDivElement | null>(null);
 
     const pointsStyles = useRef<PointStyles[]>([]);
     const currentRotation = useRef<number>(0);
@@ -95,9 +97,9 @@ export default function History({info}: HistoryProps) {
 
         rotateAnimations.add([
             gsap.to('.history__control-name', {opacity: 0, duration: 0}),
-            gsap.to('.swiper', {opacity: 0, duration: 0.2}),
+            gsap.to(swiperRef.current, {opacity: 0, duration: 0.2}),
             gsap.to('.history__control', {rotation: finalRotation, duration: 1, ease: "power1.out",}),
-            gsap.to('.history__controls', {rotation: -finalRotation, duration: 1, ease: "power1.out",}),
+            gsap.to(controlsRef.current, {rotation: -finalRotation, duration: 1, ease: "power1.out",}),
             gsap.to(yearStartRef.current, {
                 duration: 1,
                 snap: { textContent: 1 },
@@ -112,18 +114,18 @@ export default function History({info}: HistoryProps) {
             })
         ], 0)
         .add([
-            gsap.to('.swiper', {opacity: 1, duration: 0.2}),
-            gsap.to('.history__control-active .history__control-name', {opacity: 1, duration: 0.1}),
+            gsap.to(swiperRef.current, {opacity: 1, duration: 0.2}),
+            gsap.to(`.history__control:nth-child(${activeInterval}) .history__control-name`, {opacity: 1, duration: 0.1}),
         ]);
 
         prevInterval.current = activeInterval;
 
         currentRotation.current = Math.ceil(finalRotation);
 
-    }, [activeInterval]);
+    }, { scope: container, dependencies: [activeInterval] });
 
     return (
-        <div className={'history'}>
+        <div className={'history'} ref={container}>
             <div className={'history__delimiters'}>
                 <div className={'history__vertical'}></div>
                 <div className={'history__horizontal'}></div>
@@ -141,7 +143,10 @@ export default function History({info}: HistoryProps) {
                 handleNext={handleNext}
                 isAnimated={isAnimated}
             />
-            <HistorySlider events={info.intervals[activeInterval - 1].events}/>
+            <HistorySlider
+                events={info.intervals[activeInterval - 1].events}
+                swiperRef={swiperRef}
+            />
             <HistoryCircle
                 intervals={info.intervals}
                 activeInterval={activeInterval}

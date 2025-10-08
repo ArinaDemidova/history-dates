@@ -106,6 +106,8 @@ export default function App() {
     };
 
     return (
-        <History info={datesIntervalHistoryInfo}/>
+        <>
+            <History info={datesIntervalHistoryInfo}/>
+        </>
     );
 }

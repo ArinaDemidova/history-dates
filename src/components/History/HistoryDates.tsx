@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {forwardRef, RefObject} from 'react';
 import {HistoryInterval} from "../../types/History/HistoryInterval";
 
 type HistoryDatesProps = {
     interval: HistoryInterval;
-    yearStartRef?: React.RefObject<HTMLDivElement | null>;
-    yearEndRef?: React.RefObject<HTMLDivElement | null>;
+    yearStartRef?: RefObject<HTMLDivElement | null>;
+    yearEndRef?: RefObject<HTMLDivElement | null>;
 };
 
-const HistoryDates = React.forwardRef(
+const HistoryDates = forwardRef(
     ({ interval, yearStartRef, yearEndRef }: HistoryDatesProps, _ref) => {
     return (
         <div className='history__dates'>
